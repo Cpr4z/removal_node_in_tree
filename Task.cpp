@@ -2,75 +2,75 @@
 void Tree::DelNode(int number) {
 	Node* delNode = getNodeByNumber(number, root);
 	int numberOfChild = 0;
-	for (size_t i = 0; i < SIZE; i++) {//îïðåäåëÿåì êàêóþ âåðøèíó óäàëÿåì 0 èëè 1
+	for (size_t i = 0; i < SIZE; i++) {//Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ°ÐºÑƒÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼ 0 Ð¸Ð»Ð¸ 1
 		if (delNode->parent->children[i]->number == number) {
 			numberOfChild = i;
 		}
 	}
 
-	if (delNode->childCount == 0) {//íåò äåòåé
+	if (delNode->childCount == 0) {//Ð½ÐµÑ‚ Ð´ÐµÑ‚ÐµÐ¹
 		
-		delNode->parent->childCount--;//óìåíüøàåì êîëè÷åñòâî äåòåé ó ðîäèòåëüñêîé âàðøèíû íà îäíó
-		delNode->parent->children[numberOfChild] = nullptr;//óäàëÿåì óêàçàòåëü íà ðåáåíêà ó ðîäèòåëüñêîé âåðøèí
-		delete delNode->parent->children[numberOfChild];//óäàëÿåì âåðøèíó èç ìàññèâà âåðøèí
-		delNode->parent = nullptr;//çàíóëÿåì ðîäèòåëÿ ó ó äàëÿåìîé âåðøèíû
-		delete delNode->parent;//óäàëÿåì óêàçàòåëü íà ðîäèòåëüñêóþ âåðøèíó
-		delete delNode;//óäàÿëåì âåðøèíó
+		delNode->parent->childCount--;//ÑƒÐ¼ÐµÐ½ÑŒÑˆÐ°ÐµÐ¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð´ÐµÑ‚ÐµÐ¹ Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð¹ Ð²Ð°Ñ€ÑˆÐ¸Ð½Ñ‹ Ð½Ð° Ð¾Ð´Ð½Ñƒ
+		delNode->parent->children[numberOfChild] = nullptr;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½
+		delete delNode->parent->children[numberOfChild];//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð²ÐµÑ€ÑˆÐ¸Ð½
+		delNode->parent = nullptr;//Ð·Ð°Ð½ÑƒÐ»ÑÐµÐ¼ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ñƒ Ñƒ Ð´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+		delete delNode->parent;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ
+		delete delNode;//ÑƒÐ´Ð°ÑÐ»ÐµÐ¼ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ
 		
 
 	}
-	else if (delNode->childCount == 1) {//åñëè îäèí ðåáåíîê
+	else if (delNode->childCount == 1) {//ÐµÑÐ»Ð¸ Ð¾Ð´Ð¸Ð½ Ñ€ÐµÐ±ÐµÐ½Ð¾Ðº
 		delNode->parent->children[numberOfChild] = nullptr;
-		delNode->parent->children[numberOfChild] = delNode->children[0];//ïåðåíàçíà÷èëè ðåáåíêà óäàëÿåìîé âåðøèíû ðåáåíêîì ðîäèòåëüñêîé âåðøèíû
-		delNode->children[0]->parent = delNode->parent;//ïåðåîïðåäåëÿåì ðîäèòåëÿ äëÿ ðåáåíêà óäàÿëåìîé âåðøèíû
-		delNode->childCount = 0;//óìåíüøàåì êîëè÷åñòâî äåòåé ó óäàëÿåìîé âåðøèíû
-		delete delNode->parent->children[numberOfChild];//óäàëÿåì óêàçàòåëü íà äî÷åðíþþ âåðøèíó ó ðîäèòåëÿ
+		delNode->parent->children[numberOfChild] = delNode->children[0];//Ð¿ÐµÑ€ÐµÐ½Ð°Ð·Ð½Ð°Ñ‡Ð¸Ð»Ð¸ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ Ñ€ÐµÐ±ÐµÐ½ÐºÐ¾Ð¼ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+		delNode->children[0]->parent = delNode->parent;//Ð¿ÐµÑ€ÐµÐ¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ð´Ð»Ñ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° ÑƒÐ´Ð°ÑÐ»ÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+		delNode->childCount = 0;//ÑƒÐ¼ÐµÐ½ÑŒÑˆÐ°ÐµÐ¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð´ÐµÑ‚ÐµÐ¹ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+		delete delNode->parent->children[numberOfChild];//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð´Ð¾Ñ‡ÐµÑ€Ð½ÑŽÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ
 		delete delNode->parent;
 		delete delNode;
 	}
-	else if ((delNode->childCount == 2) && (delNode->parent->childCount == 1)) {//åñëè ó óäàëÿåìîé âåðøèíû 2 ðåáåíêà è ó ðîäèòåëüñêîé îäèí ðåáåíîê
-		delNode->parent->childCount++;//óâåëè÷èâàåì êîëè÷åñòâî äåòåé íà åäèíèöó
+	else if ((delNode->childCount == 2) && (delNode->parent->childCount == 1)) {//ÐµÑÐ»Ð¸ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ 2 Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ð¸ Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð¹ Ð¾Ð´Ð¸Ð½ Ñ€ÐµÐ±ÐµÐ½Ð¾Ðº
+		delNode->parent->childCount++;//ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð´ÐµÑ‚ÐµÐ¹ Ð½Ð° ÐµÐ´Ð¸Ð½Ð¸Ñ†Ñƒ
 		delNode->parent->children[numberOfChild] = nullptr;
-		delNode->parent->children[0] = delNode->children[0];//ïðèñâàèâàåì ëåâîãî ðåáåíêà â êà÷åñòâå ëåâîãî ðåáåíêà ó ðîäèòåëÿ
-		delNode->parent->children[1] = delNode->children[1];//ïðèñâàèâàåì ïðàâîãî ðåáåíêà â êà÷åñòâå ïðàâîãî ðåáíêà ó ðîäèòåëÿ 
+		delNode->parent->children[0] = delNode->children[0];//Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°ÐµÐ¼ Ð»ÐµÐ²Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ð² ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ðµ Ð»ÐµÐ²Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ
+		delNode->parent->children[1] = delNode->children[1];//Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°ÐµÐ¼ Ð¿Ñ€Ð°Ð²Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ð² ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ðµ Ð¿Ñ€Ð°Ð²Ð¾Ð³Ð¾ Ñ€ÐµÐ±Ð½ÐºÐ° Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ 
 		delNode->childCount = 0;
-		delNode->children[0]->parent = delNode->parent;//ïðèñâàèâàåì ðåáåíêó óäàëÿåìîé âåðøèíû íîâîãî ðîäèòåëÿ
-		delNode->children[1]->parent = delNode->parent;//ïðèñâàèâàåì ðåáåíêó óäàëÿåìîé âåðøèíû íîâîãî ðîäèòåëÿ
-		delete[] delNode->children;//óäàëÿåì ìàññèâ èç äåòåé ó óäàëÿåìîé âåðøèíû
-		delete delNode->parent;//óäàëÿåì óêàçàòåëü íà ðîäèòåëüñêóþ âåðøèíó ó óäàëÿåìîé âåðøèíû
+		delNode->children[0]->parent = delNode->parent;//Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°ÐµÐ¼ Ñ€ÐµÐ±ÐµÐ½ÐºÑƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ
+		delNode->children[1]->parent = delNode->parent;//Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°ÐµÐ¼ Ñ€ÐµÐ±ÐµÐ½ÐºÑƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ
+		delete[] delNode->children;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð¼Ð°ÑÑÐ¸Ð² Ð¸Ð· Ð´ÐµÑ‚ÐµÐ¹ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+		delete delNode->parent;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
 		delete delNode;
 	}
-	else if ((delNode->childCount == 2) && (delNode->parent->childCount == 2)) {//åñëè ó óäàëÿåìîé âåðøèíû 2 ðåáåíêà è ó ðîäèòåëüñêîé âåðøèíû òîæå 2 ðåáåíêà
+	else if ((delNode->childCount == 2) && (delNode->parent->childCount == 2)) {//ÐµÑÐ»Ð¸ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ 2 Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ð¸ Ñƒ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ Ñ‚Ð¾Ð¶Ðµ 2 Ñ€ÐµÐ±ÐµÐ½ÐºÐ°
 
-		if (delNode->children[0] <= delNode->children[1]) {//åñëè ïåðâàÿ âåðøèíà ìåíüøå âòîðîé, òî óäàëÿåì ïåðâóþ âåðøèíó
+		if (delNode->children[0] <= delNode->children[1]) {//ÐµÑÐ»Ð¸ Ð¿ÐµÑ€Ð²Ð°Ñ Ð²ÐµÑ€ÑˆÐ¸Ð½Ð° Ð¼ÐµÐ½ÑŒÑˆÐµ Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹, Ñ‚Ð¾ ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð¿ÐµÑ€Ð²ÑƒÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ
 
-			delNode->parent->children[numberOfChild] = delNode->children[1];//îïðåäåëÿåì áîëüøåãî ðåáåíêà êàê âòîðîãî ðåáåíêà ðîäèòåëÿ óäàëåííîé âåðøèíû
-			delNode->children[1]->parent = delNode->parent;//íàçíà÷àåì ó áîëüøåé âåðøèíû ðîäèòåëÿ 
-			delNode->childCount = 0;//îáíóëÿåì êîëè÷åñòâî äåòåé 
-			if (delNode->children[0]->childCount != 0) {//åñëè ó óäàëÿåìîé âåðøèíû åñòü äåòè, òî âûçûâàåì ðåêóðñèþ
+			delNode->parent->children[numberOfChild] = delNode->children[1];//Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ð±Ð¾Ð»ÑŒÑˆÐµÐ³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° ÐºÐ°Ðº Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ ÑƒÐ´Ð°Ð»ÐµÐ½Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+			delNode->children[1]->parent = delNode->parent;//Ð½Ð°Ð·Ð½Ð°Ñ‡Ð°ÐµÐ¼ Ñƒ Ð±Ð¾Ð»ÑŒÑˆÐµÐ¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ 
+			delNode->childCount = 0;//Ð¾Ð±Ð½ÑƒÐ»ÑÐµÐ¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð´ÐµÑ‚ÐµÐ¹ 
+			if (delNode->children[0]->childCount != 0) {//ÐµÑÐ»Ð¸ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ ÐµÑÑ‚ÑŒ Ð´ÐµÑ‚Ð¸, Ñ‚Ð¾ Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÐµÐ¼ Ñ€ÐµÐºÑƒÑ€ÑÐ¸ÑŽ
 				DelNode(delNode->children[0]->number);
 			}
 			else {
-				delete delNode->children[0]->parent;//óêàçàòåëü íà ðîäèòåëÿ ïåðâîãî ðåáåíêà
-				delete delNode->children[1]->parent;//óêàçàòåëü íà ðîäèòåëÿ âòîðîãî ðåáåíêà
-				delete delNode->parent;//óäàëÿåì óêàçàòåëü íà ðîäèòåëüñêóþ âåðøèíó ó óäàëÿåìîé âåðøèíû 
-				delete[] delNode->children;//óäàëÿåì ìàññèâ 
+				delete delNode->children[0]->parent;//ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ°
+				delete delNode->children[1]->parent;//ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ°
+				delete delNode->parent;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ 
+				delete[] delNode->children;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð¼Ð°ÑÑÐ¸Ð² 
 				delete delNode->children[0];
 				delete delNode->children[1];
 			}
 		}
 		else {
-			delNode->parent->children[numberOfChild] = delNode->children[0];//îïðåäåëÿåì áîëüøåãî ðåáåíêà êàê âòîðîãî ðåáåíêà ðîäèòåëÿ óäàëåííîé âåðøèíû
-			delNode->children[0]->parent = delNode->parent;//íàçíà÷àåì ó áîëüøåé âåðøèíû ðîäèòåëÿ 
-			delNode->childCount = 0;//îáíóëÿåì êîëè÷åñòâî äåòåé 
-			if (delNode->children[1]->childCount != 0) {//åñëè ó óäàëÿåìîé âåðøèíû åñòü äåòè, òî âûçûâàåì ðåêóðñèþ
+			delNode->parent->children[numberOfChild] = delNode->children[0];//Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ð±Ð¾Ð»ÑŒÑˆÐµÐ³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° ÐºÐ°Ðº Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ ÑƒÐ´Ð°Ð»ÐµÐ½Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹
+			delNode->children[0]->parent = delNode->parent;//Ð½Ð°Ð·Ð½Ð°Ñ‡Ð°ÐµÐ¼ Ñƒ Ð±Ð¾Ð»ÑŒÑˆÐµÐ¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ 
+			delNode->childCount = 0;//Ð¾Ð±Ð½ÑƒÐ»ÑÐµÐ¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð´ÐµÑ‚ÐµÐ¹ 
+			if (delNode->children[1]->childCount != 0) {//ÐµÑÐ»Ð¸ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ ÐµÑÑ‚ÑŒ Ð´ÐµÑ‚Ð¸, Ñ‚Ð¾ Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÐµÐ¼ Ñ€ÐµÐºÑƒÑ€ÑÐ¸ÑŽ
 				DelNode(delNode->children[1]->number);
 			}
 			else {
-				delete delNode->children[0]->parent;//óêàçàòåëü íà ðîäèòåëÿ ïåðâîãî ðåáåíêà
-				delete delNode->children[1]->parent;//óêàçàòåëü íà ðîäèòåëÿ âòîðîãî ðåáåíêà
-				delete delNode->parent;//óäàëÿåì óêàçàòåëü íà ðîäèòåëüñêóþ âåðøèíó ó óäàëÿåìîé âåðøèíû 
-				delete[] delNode->children;//óäàëÿåì ìàññèâ 
+				delete delNode->children[0]->parent;//ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ°
+				delete delNode->children[1]->parent;//ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ€ÐµÐ±ÐµÐ½ÐºÐ°
+				delete delNode->parent;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñƒ Ñƒ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ Ð²ÐµÑ€ÑˆÐ¸Ð½Ñ‹ 
+				delete[] delNode->children;//ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð¼Ð°ÑÑÐ¸Ð² 
 				delete delNode->children[0];
 				delete delNode->children[1];
 			}
@@ -80,11 +80,11 @@ void Tree::DelNode(int number) {
 }
 void Tree::Node::delChild(Node* child)
 {
-	// Âàø êîä äîëæåí áûòü çäåñü
+	// Ð’Ð°Ñˆ ÐºÐ¾Ð´ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ Ð·Ð´ÐµÑÑŒ
 	if (child->childCount == 0) {
 		return;
 	}
-	if (child->childCount == 1) {//åñëè îäèí ðåáåíîê
+	if (child->childCount == 1) {//ÐµÑÐ»Ð¸ Ð¾Ð´Ð¸Ð½ Ñ€ÐµÐ±ÐµÐ½Ð¾Ðº
 		DelNode(child->children[0]->number);
 	}
 	if (child->childCount == 2) {

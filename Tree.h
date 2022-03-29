@@ -1,17 +1,17 @@
 #pragma once
 #define SIZE 10
 
-class Tree { // класс дерева
+class Tree { // РєР»Р°СЃСЃ РґРµСЂРµРІР°
 public:
-    struct Node { // структура узла
+    struct Node { // СЃС‚СЂСѓРєС‚СѓСЂР° СѓР·Р»Р°
         Node(int _number, Node* _parent = nullptr);
         ~Node();
 
-        int number; // номер мершины
+        int number; // РЅРѕРјРµСЂ РјРµСЂС€РёРЅС‹
 
-        Node* parent; // родительская вершина
-        Node* children[SIZE]; // список дочерних вершин
-        int childCount; // количество детей
+        Node* parent; // СЂРѕРґРёС‚РµР»СЊСЃРєР°СЏ РІРµСЂС€РёРЅР°
+        Node* children[SIZE]; // СЃРїРёСЃРѕРє РґРѕС‡РµСЂРЅРёС… РІРµСЂС€РёРЅ
+        int childCount; // РєРѕР»РёС‡РµСЃС‚РІРѕ РґРµС‚РµР№
 
         void addChild(Node* newChild);
         void delChild(Node* child);
