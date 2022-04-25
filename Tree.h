@@ -24,7 +24,7 @@ public:
     void setRoot(int number);
     void addNode(int parentNumber, int newNodeNumber);
 
-    void DelNode(int nodeNumber);
+    void delNode(int nodeNumber);
     void dummy(int nodeNumber);
 
     
