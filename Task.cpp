@@ -1,6 +1,6 @@
 #include "Tree.h"
 
-void Tree::DelNode(int number) {
+void Tree::delNode(int number) {
 	Node* delNode = getNodeByNumber(number, root);
 	int numberOfChild = 0;
 	int prevCount = delNode->childCount;
